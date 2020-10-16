@@ -1,0 +1,165 @@
+criando um projeto 
+  create-react-app nomeDoProjeto
+
+### 2 tipos de componentes
+  //componente funcional
+  function App() {
+    return (
+      <> 
+        <h1>
+          Ola Mundo
+        </h1>
+      </>
+    );
+  }
+
+  componente de classe
+    class App2 extends React.Component{
+      render(){
+        return (
+          <h1>
+            Ola Mundo 2
+          </h1>
+        )
+      }
+    }
+
+    Dica ao criar funções dentro desse tipo de componente crie funçoes arrow para evitar problemas com this, mas caso contrario tera que cria um contructor
+    constructor(){
+      super()
+      this.NomeDaFuncao = this.NomeDaFuncao.bind(this)
+    }
+
+  //exporte do componente
+  export default App2;
+###
+
+### Helpers
+  renderizando mais de um elemeto dentro de um container que nao vai gerar html 
+    <React.Fragment>
+      <h1>Elemento 1</h1>
+      <h1>Elemento 2</h1>
+    </React.Fragment>
+
+  outra maneira
+    <>
+      <h1>Elemento 1</h1>
+      <h1>Elemento 2</h1>
+    </>
+###
+
+### state local
+  state local fica dentro do proprio componente ou paginal 
+
+  criando o estado, lembrando que o estado é um objeto
+    state = {
+      nome: "Anderson B. Silva"
+    }
+  
+  modificar o state "Atualizar", react nao permiter fazzer alteração diretamente, obrigatorio usar o setState
+    this.setState({
+      nome: newValue
+    })
+###
+
+### Props
+  Props são os atributos das tags, podemo criar qualquer atibuto e pegalo dentro do componente, 
+  todo componente tem o props injetado automaticamente
+
+  acessando props 
+    this.props.nomeQueFoiPAssado
+###
+
+### Ciclos de vida
+  componente de classe permite o acesso ao ciclo de vida so mesmo
+  
+  componente acabou de ser montado
+    componentDidMount(){}
+
+  executado assim que ele sai da tela, usado pra fechamento de socket
+    componentWillUnMount(){}
+
+  quando o componentes estoura algum erro
+    componentDidCatch(){
+      alert('erro')
+    }
+
+  quando o componentes esta sendo montado e esta recebendo os props
+    componentWillReceiveProps(){
+      alert('recebendo')
+    }
+
+  quando o componentes vai ser atualizado
+    componentDidMount(){
+      alert('update')
+    }
+  
+ Dis se o componente deve ser atualizado ou nao 
+    shouldComponentUpdate(){
+      alert('update')
+    }
+###
+
+### Rotas
+  para criar rotas usamos o react-routes
+
+  importar o react-router-dom
+
+  recomendado criar uma arquivo com as rotas, nele deve conter todos os componentes
+
+  <HashRouter> todas as rotas ficam englobadas por esse elemento
+        <Switch> //funciona como o swtch normal
+            <Route exact path="/cadastro-produtos" component={CadastroProduto} /> path é a url digitada componente é qual componente a ser renderizado
+        </Switch>
+  </HashRouter>
+
+  menu de navegação 
+    O componente de navegação deve fica dentro de HashRouter, pois as rotas são definidas por elementp filho chamado de Link
+    importe o link dentr do componente que havera a navegação 
+
+    import {Link} from 'react-router-dom'
+
+    no lugar de usar a subistirua por Link, e a propriedade onde é passada a url é chamada de to="/" 
+    exemplo:
+      <Link className="nav-link" to="/consulta-produtos">Consulta </Link>
+###
+
+### hooks componentes funcionais 
+  por conveção cada hook começa com a palvra use
+
+  estado em componentes de função
+    import React, { useState } from 'react';
+
+    o useState é responsavel pro criar o estado 
+
+    criando um estado 
+      const [numero, setNumero] = useState(0)
+
+      no exemplo acima criamos uma constante que guarda 1  unico estado, o seundo parametro é a função para atualizar este estado 
+    
+    atualizando o estado 
+      setNumero(novo valor aqui )
+
+      o nome da função que faz a aatualização deve ser o mesmo que foi definido a iniciar o estado
+    
+    outra maneira de criar o esatdo semelhando ao compnente de classe
+      const [state,setState] = useState({
+        numero: 0,
+        segNumero:0,
+        resultado:0
+      })
+
+    Ciclos de vida componente funcional
+
+    similar ao ComponenteDidMount
+      import React, { useState, useEffect} from 'react';
+      
+      useEffect( () => {
+        console.log('Variavel: ', numero)
+      }, [numero])
+
+      passado 1 uma funçaõ de callbak depois um array, se este array estiver vazio executara apenas uma vez, caso passae dentro do 
+      arrai variavel de estado a cada alteração na variavel a função sera executada, se nao passar o segundo parametro, o callback vai ser executado a cada
+      alteração de estado
+###
+

@@ -1,0 +1,15 @@
+flux é uma arquitetura que nem MVC, foi criado pelo facebook
+
+action
+  qualquer ação disparada, a ação vai acionar um dispatcher
+
+dispatcher (parte principal pois conte toda a logica)
+  ouve a ação disparada e chma uma função especifica do estado, ele vai evoluir o estado
+
+Store
+  é um state global
+
+View
+  atualiza a view
+
+ACTION -> DISPATCHER -> STORE -> VIEW
